@@ -4,6 +4,8 @@ import com.luan.api.model.Submission;
 import com.luan.api.repository.SubmissionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SubmissionService {
 
@@ -17,8 +19,8 @@ public class SubmissionService {
         return submissionRepository.findHigherScoreByChallengeId(challengeId).orElse(null);
     }
 
-    public Submission findByChallengeIdAndAccelerationId(int challengeId, int accelerationId){
-        return submissionRepository.findByChallengeIdAndAccelerationId(challengeId,accelerationId).orElse(null);
+    public List<Submission> findByChallengeIdAndAccelerationId(int challengeId, int accelerationId){
+        return submissionRepository.findByChallengeIdAndAccelerationId(challengeId,accelerationId);
     }
 
     public Submission save(Submission submission){

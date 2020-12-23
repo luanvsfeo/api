@@ -4,6 +4,8 @@ import com.luan.api.model.Challenge;
 import com.luan.api.repository.ChallengeRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ChallengeService {
 
@@ -13,8 +15,8 @@ public class ChallengeService {
         this.challengeRepository = challengeRepository;
     }
 
-    public Challenge findByAccelerationIdAndUserId(int accelerationId, int userId){
-        return challengeRepository.findByAccelerationIdAndUserId(accelerationId,userId).orElse(null);
+    public List<Challenge> findByAccelerationIdAndUserId(int accelerationId, int userId){
+        return challengeRepository.findByAccelerationIdAndUserId(accelerationId,userId);
     }
 
     public Challenge save(Challenge challenge){

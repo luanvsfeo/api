@@ -4,6 +4,8 @@ import com.luan.api.model.Acceleration;
 import com.luan.api.repository.AccelerationRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccelerationService {
 
@@ -21,8 +23,8 @@ public class AccelerationService {
         return accelerationRepository.findByName(accelerationName).orElse(null);
     }
 
-    public Acceleration findByCompanyId(int companyId){
-        return accelerationRepository.findByCompanyId(companyId).orElse(null);
+    public List<Acceleration> findByCompanyId(int companyId){
+        return accelerationRepository.findByCompanyId(companyId);
     }
 
     public Acceleration save(Acceleration acceleration){

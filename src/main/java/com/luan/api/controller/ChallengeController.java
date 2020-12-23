@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/challenge")
 public class ChallengeController {
@@ -18,16 +20,16 @@ public class ChallengeController {
     }
 
     @GetMapping
-    public ResponseEntity<Challenge> find(@Param("accelerationId")Integer accelerationId,
+    public ResponseEntity<?> find(@Param("accelerationId")Integer accelerationId,
                                @Param("userId")Integer userId){
 
-        Challenge challenge = null;
+        List<Challenge> challengeList = null;
 
         if(userId != null && accelerationId != null){
-            challenge = challengeService.findByAccelerationIdAndUserId(accelerationId, userId);
+            challengeList = challengeService.findByAccelerationIdAndUserId(accelerationId, userId);
         }
 
-        return new ResponseEntity<>(challenge, HttpStatus.OK);
+        return new ResponseEntity<>(challengeList, HttpStatus.OK);
     }
 
     @PatchMapping

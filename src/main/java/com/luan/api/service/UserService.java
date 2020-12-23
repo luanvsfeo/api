@@ -4,6 +4,8 @@ import com.luan.api.model.User;
 import com.luan.api.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -17,12 +19,12 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User findByAccelerationName(String  accelerationName){
-        return userRepository.findByAccelerationName(accelerationName).orElse(null);
+    public List<User> findByAccelerationName(String  accelerationName){
+        return userRepository.findByAccelerationName(accelerationName);
     }
 
-    public User findByCompanyId(int companyId){
-        return userRepository.findByCompanyId(companyId).orElse(null);
+    public List<User> findByCompanyId(int companyId){
+        return userRepository.findByCompanyId(companyId);
     }
 
     public User save(User user){

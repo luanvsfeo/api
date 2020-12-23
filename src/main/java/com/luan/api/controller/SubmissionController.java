@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/submission")
 public class SubmissionController {
@@ -18,18 +21,18 @@ public class SubmissionController {
     }
 
     @GetMapping
-    public ResponseEntity<Submission> find(@Param("challengeId") Integer challengeId,
+    public ResponseEntity<?> find(@Param("challengeId") Integer challengeId,
                                            @Param("accelerationId") Integer accelerationId){
 
-        Submission submission = null;
+        List<Submission> submissionList = null;
 
         if(challengeId != null && accelerationId != null){
-            submission = submissionService.findByChallengeIdAndAccelerationId(challengeId,accelerationId);
+            submissionList = submissionService.findByChallengeIdAndAccelerationId(challengeId,accelerationId);
         }else if(challengeId != null ){
-            submission = submissionService.findHigherScoreByChallengeId(challengeId);
+            submissionList = Arrays.asList(submissionService.findHigherScoreByChallengeId(challengeId));
         }
 
-        return new ResponseEntity<>(submission, HttpStatus.OK);
+        return new ResponseEntity<>(submissionList, HttpStatus.OK);
     }
 
 

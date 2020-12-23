@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,6 +20,6 @@ public interface SubmissionRepository extends JpaRepository<Submission, Submissi
             "where " +
             "s.user_id in (select user_id from candidate c where c.acceleration_id = :accelerationId) " +
             "and s.challenge_id  =  :challengeId ")
-    Optional<Submission> findByChallengeIdAndAccelerationId(@Param("challengeId") int challengeId,
-                                                            @Param("accelerationId") int accelerationId);
+    List<Submission> findByChallengeIdAndAccelerationId(@Param("challengeId") int challengeId,
+                                                        @Param("accelerationId") int accelerationId);
 }

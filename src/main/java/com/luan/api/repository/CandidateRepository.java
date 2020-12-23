@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, CandidateI
 
 
     @Query(nativeQuery = true, value = "select * from candidate c where c.acceleration_id  = :acceleration_id ")
-    Optional<Candidate> findByAccelerationId(@Param("acceleration_id") int accelerationId);
+    List<Candidate> findByAccelerationId(@Param("acceleration_id") int accelerationId);
 }

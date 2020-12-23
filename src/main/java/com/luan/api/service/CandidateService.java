@@ -4,6 +4,8 @@ import com.luan.api.model.Candidate;
 import com.luan.api.repository.CandidateRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CandidateService {
 
@@ -17,8 +19,8 @@ public class CandidateService {
         return candidateRepository.findByCompanyId(companyId).orElse(null);
     }
 
-    public Candidate findByAccelerationId(int accelerationId){
-        return candidateRepository.findByAccelerationId(accelerationId).orElse(null);
+    public List<Candidate> findByAccelerationId(int accelerationId){
+        return candidateRepository.findByAccelerationId(accelerationId);
     }
 
     public Candidate save(Candidate candidate){

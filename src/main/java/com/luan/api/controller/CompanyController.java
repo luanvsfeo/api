@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/company")
 public class CompanyController {
@@ -18,21 +21,21 @@ public class CompanyController {
     }
 
     @GetMapping
-    public ResponseEntity<Company> find(@Param("id") Integer id,
+    public ResponseEntity<?> find(@Param("id") Integer id,
                                @Param("accelerationId") Integer accelerationId,
                                @Param("userId") Integer userId){
 
-        Company company = null;
+        List<Company> companyList = null;
 
         if(id != null){
-            company = companyService.findById(id);
+            Arrays.asList(companyService.findById(id));
         }else if(accelerationId != null){
-            company = companyService.findByAccelerationId(accelerationId);
+            companyList = companyService.findByAccelerationId(accelerationId);
         }else if(userId != null){
-            company = companyService.findByUserId(userId);
+            companyList = companyService.findByUserId(userId);
         }
 
-        return ResponseEntity.ok(company);
+        return ResponseEntity.ok(companyList);
     }
 
 

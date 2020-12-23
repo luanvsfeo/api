@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface ChallengeRepository extends JpaRepository<Challenge,Integer> {
@@ -17,6 +17,6 @@ public interface ChallengeRepository extends JpaRepository<Challenge,Integer> {
                     "inner join candidate c2 on c2.acceleration_id  = a.challenge_id  " +
                     "where c2.user_id = :userId " +
                     "and a.id = :accelerationId")
-    Optional<Challenge> findByAccelerationIdAndUserId(@Param("accelerationId") int accelerationId,
-                                                      @Param("userId") int userId);
+    List<Challenge> findByAccelerationIdAndUserId(@Param("accelerationId") int accelerationId,
+                                                  @Param("userId") int userId);
 }

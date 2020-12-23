@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -18,15 +21,15 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<User> find(@Param("id") Integer id,
+    public ResponseEntity<?> find(@Param("id") Integer id,
                                     @Param("accelerationName") String accelerationName,
                                     @Param("companyId") Integer companyId){
-        User user =  null;
+        List<User> user =  null;
 
         if(id != null){
-            user = userService.findById(id);
+            user = Arrays.asList(userService.findById(id));
         }else if(accelerationName != null){
-            user =  userService.findByAccelerationName(accelerationName);
+            user = userService.findByAccelerationName(accelerationName);
         }else if(companyId != null){
             user = userService.findByCompanyId(companyId);
         }

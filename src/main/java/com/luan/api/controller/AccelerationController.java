@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/acceleration")
 public class AccelerationController {
@@ -18,21 +21,21 @@ public class AccelerationController {
     }
 
     @GetMapping
-    public ResponseEntity<Acceleration> find(@Param("id")Integer id,
+    public ResponseEntity<?> find(@Param("id")Integer id,
                                @Param("name")String name,
                                @Param("companyId") Integer companyId){
 
-        Acceleration acceleration = null;
+        List<Acceleration> accelerationList = null;
 
         if(id != null){
-            acceleration = accelerationService.findAccelerationById(id);
+            accelerationList = Arrays.asList(accelerationService.findAccelerationById(id));
         }else if(name != null){
-            acceleration = accelerationService.findAccelerationByName(name);
+            accelerationList = Arrays.asList(accelerationService.findAccelerationByName(name));
         }else if(companyId != null){
-            acceleration = accelerationService.findByCompanyId(companyId);
+            accelerationList = accelerationService.findByCompanyId(companyId);
         }
 
-        return new ResponseEntity(acceleration, HttpStatus.OK);
+        return new ResponseEntity(accelerationList, HttpStatus.OK);
     }
 
 

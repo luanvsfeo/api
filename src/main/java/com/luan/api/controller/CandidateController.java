@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequestMapping("/candidate")
 public class CandidateController {
@@ -18,19 +21,19 @@ public class CandidateController {
     }
 
     @GetMapping
-    public ResponseEntity<Candidate> find(@Param("companyId") Integer companyId,
+    public ResponseEntity<?> find(@Param("companyId") Integer companyId,
                      @Param("accelerationId") Integer accelerationId){
 
-        Candidate candidate = null;
+        List<Candidate> candidateList = null;
 
         if(companyId != null){
-            candidate = candidateService.findByCompanyId(companyId);
+            candidateList = Arrays.asList(candidateService.findByCompanyId(companyId));
         }else if(accelerationId != null){
-            candidate = candidateService.findByAccelerationId(accelerationId);
+            candidateList = candidateService.findByAccelerationId(accelerationId);
         }
 
 
-        return new ResponseEntity<>(candidate, HttpStatus.OK);
+        return new ResponseEntity<>(candidateList, HttpStatus.OK);
     }
 
     @PatchMapping
