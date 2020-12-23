@@ -1,6 +1,7 @@
 package com.luan.api.repository;
 
 import com.luan.api.model.Submission;
+import com.luan.api.model.SubmissionId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SubmissionRepository extends JpaRepository<Submission, Integer> {
+public interface SubmissionRepository extends JpaRepository<Submission, SubmissionId> {
 
     @Query(nativeQuery = true, value = "select s.* from submission s where s.challenge_id = :challengeId order by s.score desc")
     Optional<Submission> findHigherScoreByChallengeId(@Param("challengeId") int challengeId);

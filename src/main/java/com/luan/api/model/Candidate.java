@@ -24,7 +24,6 @@ public class Candidate {
     private Date createdAt = new Date();
 
     public Candidate(){
-
     }
 
 

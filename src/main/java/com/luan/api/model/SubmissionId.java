@@ -8,6 +8,9 @@ public class SubmissionId implements Serializable {
 
     private int challengeId;
 
+    public SubmissionId() {
+    }
+
     public SubmissionId(int userId, int challengeId) {
         this.userId = userId;
         this.challengeId = challengeId;
